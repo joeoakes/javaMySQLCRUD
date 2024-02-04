@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StudentCRUDExample {
-    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/your_database_name";
-    private static final String USERNAME = "your_username";
-    private static final String PASSWORD = "your_password";
+    private static final String JDBC_URL = "jdbc:mysql://127.0.0.1:3306/School";
+    private static final String USERNAME = "root";
+    private static final String PASSWORD = "IST888IST888";
 
     public static void main(String[] args) {
         Connection connection = null;
