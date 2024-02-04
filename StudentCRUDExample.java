@@ -17,7 +17,7 @@ public class StudentCRUDExample {
             connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
 
             // Create
-            insertStudent(connection, "John", "Doe", 20, "john@example.com");
+            insertStudent(connection, 1, "John", "Doe", 20, "john@example.com");
 
             // Read
             List<Student> students = getAllStudents(connection);
@@ -50,13 +50,14 @@ public class StudentCRUDExample {
         }
     }
 
-    private static void insertStudent(Connection connection, String firstName, String lastName, int age, String email) throws SQLException {
-        String sql = "INSERT INTO students (firstName, lastName, age, email) VALUES (?, ?, ?, ?)";
+    private static void insertStudent(Connection connection, int id, String firstName, String lastName, int age, String email) throws SQLException {
+        String sql = "INSERT INTO students (id, firstName, lastName, age, email) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setString(1, firstName);
-            preparedStatement.setString(2, lastName);
-            preparedStatement.setInt(3, age);
-            preparedStatement.setString(4, email);
+            preparedStatement.setInt(1, id);
+            preparedStatement.setString(2, firstName);
+            preparedStatement.setString(3, lastName);
+            preparedStatement.setInt(4, age);
+            preparedStatement.setString(5, email);
             preparedStatement.executeUpdate();
         }
     }
@@ -79,7 +80,7 @@ public class StudentCRUDExample {
     }
 
     private static void updateStudent(Connection connection, int id, String newFirstName) throws SQLException {
-        String sql = "UPDATE students SET first_name = ? WHERE id = ?";
+        String sql = "UPDATE students SET firstName = ? WHERE id = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, newFirstName);
             preparedStatement.setInt(2, id);
