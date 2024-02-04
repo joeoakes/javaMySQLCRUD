@@ -51,7 +51,7 @@ public class StudentCRUDExample {
     }
 
     private static void insertStudent(Connection connection, String firstName, String lastName, int age, String email) throws SQLException {
-        String sql = "INSERT INTO students (first_name, last_name, age, email) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO students (firstName, lastName, age, email) VALUES (?, ?, ?, ?)";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, firstName);
             preparedStatement.setString(2, lastName);
@@ -63,13 +63,13 @@ public class StudentCRUDExample {
 
     private static List<Student> getAllStudents(Connection connection) throws SQLException {
         List<Student> students = new ArrayList<>();
-        String sql = "SELECT id, first_name, last_name, age, email FROM students";
+        String sql = "SELECT id, firstName, lastName, age, email FROM students";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql);
              ResultSet resultSet = preparedStatement.executeQuery()) {
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
-                String firstName = resultSet.getString("first_name");
-                String lastName = resultSet.getString("last_name");
+                String firstName = resultSet.getString("firstName");
+                String lastName = resultSet.getString("lastName");
                 int age = resultSet.getInt("age");
                 String email = resultSet.getString("email");
                 students.add(new Student(id, firstName, lastName, age, email));
