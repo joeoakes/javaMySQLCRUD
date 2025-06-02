@@ -1,13 +1,14 @@
-import java.sql.Connection;
+//import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.Connection;
 
 public class StudentCRUDExample {
-    private static final String JDBC_URL = "jdbc:mysql://127.0.0.1:3306/School";
+    private static final String JDBC_URL = "jdbc:mysql://127.0.0.1:3306/school";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "IST888IST888";
 
@@ -22,7 +23,7 @@ public class StudentCRUDExample {
             // Read
             List<Student> students = getAllStudents(connection);
             for (Student student : students) {
-                System.out.println(student);
+                System.out.println(student.toString());
             }
 
             // Update
@@ -31,7 +32,7 @@ public class StudentCRUDExample {
             // Read again
             students = getAllStudents(connection);
             for (Student student : students) {
-                System.out.println(student);
+                System.out.println(student.toString());
             }
 
             // Delete
@@ -50,7 +51,7 @@ public class StudentCRUDExample {
         }
     }
 
-    private static void insertStudent(Connection connection, int id, String firstName, String lastName, int age, String email) throws SQLException {
+  private static void insertStudent(Connection connection, int id, String firstName, String lastName, int age, String email) throws SQLException {
         String sql = "INSERT INTO students (id, firstName, lastName, age, email) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, id);
@@ -122,4 +123,5 @@ class Student {
                 ", email='" + email + '\'' +
                 '}';
     }
+
 }
